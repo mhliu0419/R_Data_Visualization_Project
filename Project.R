@@ -1,7 +1,7 @@
 # Data Visualization Project
 
 # load data&library
-df <- read.csv('Economist_Data.csv')
+df <- read.csv('~/Desktop/R-Course-HTML-Notes/R-for-Data-Science-and-Machine-Learning/Training\ Exercises/Capstone\ and\ Data\ Viz\ Projects/Data\ Visualization\ Project/Economist_Assignment_Data.csv')
 library(ggplot2)
 library(dplyr)
 
@@ -34,6 +34,44 @@ pl3
 
 pl4 <- pl3 + geom_text(aes(label = Country))
 pl4
+
+# To show only the selected countries label we want
+
+selected_Country_Label <- c("Russia", "Venezuela", "Iraq", "Myanmar", "Sudan",
+                   "Afghanistan", "Congo", "Greece", "Argentina", "Brazil",
+                   "India", "Italy", "China", "South Africa", "Spane",
+                   "Botswana", "Cape Verde", "Bhutan", "Rwanda", "France",
+                   "United States", "Germany", "Britain", "Barbados", "Norway", "Japan",
+                   "New Zealand", "Singapore")
+
+pl5 <- pl3 + geom_text(aes(label = Country), color = 'gray20',
+                      data = subset(df, Country %in% selected_Country_Label),
+                      check_overlap = T)
+pl5
+
+# Change theme
+
+pl6 <- pl5 + theme_bw()
+pl6
+
+
+# To modify scale of Variable X, CPI, and scale of Variable Y, HDI
+
+pl7 <- pl6 + scale_x_continuous(name = 'Corruption Perceptions Index, 2011 (10 = Least Corrupt)',
+                                limits = c(0.9,10.5), breaks = 1:10)
+pl7
+
+pl8 <- pl7 + scale_y_continuous(name = 'Human Development Index, 2011 (1 = Best)',
+                                limits = c(0.2,1))
+pl8
+
+
+# Add a title
+
+pl9 <- pl8 + ggtitle('Corruption and Human Development')
+pl9
+
+
 
 
 
